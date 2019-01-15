@@ -98,7 +98,7 @@ public class TestApplicationTests {
                     String[] s = lenLine.split(" ");
                     filedList.add(s);
 
-                     s = line.split("\\s+");
+                     s = analyzeLine()
                     filedList.add(s);
                     continue;
                 } else if (start && line.startsWith("  ")) {
