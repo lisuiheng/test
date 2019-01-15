@@ -1,0 +1,77 @@
+ppptrp11.p 2+                                          1.5.2 Item Data Report                                         Date: 07/16/18
+Page:    1                                            北京安道拓汽车部件有限公司                                      Time: 15:48:02
+
+Prod Line:
+                                                    Drawing
+Item Number        Description              UM Rev  Brk Cat            Group    Type     Status   Added    Dsgn Grp CKD/Loca Size
+------------------ ------------------------ -- ---- ------------------ -------- -------- -------- -------- -------- -------- ----
+ A2055406551       v205线束                 EA                                  V205OHS  AC       08/04/16
+
+Prod Line: 1130 原材料-化工原料-发泡工厂
+                                                    Drawing
+Item Number        Description              UM Rev  Brk Cat            Group    Type     Status   Added    Dsgn Grp CKD/Loca Size
+------------------ ------------------------ -- ---- ------------------ -------- -------- -------- -------- -------- -------- ----
+1333777            中央泡沫                 EA                                  V212SE   IC       05/13/14
+                   FOAM PAD CENTER INSERT
+1333779            侧翼泡沫                 EA                                  V212SE   IC       05/13/14
+                   FOAM PAD HARD BOLSTER
+5100000101         330N-G基础聚醚           KG                                  EL       AC       03/20/03          local
+                   BASE POLY                        Chemical-化料
+5100000112         POLY1                    KG                                  EL       IC       06/22/05
+                   POLY1
+5100000113         POLY2                    KG                                  EL       IC       06/22/05
+                   POLY2
+5100000114         POLY3                    KG                                  EL       IC       06/22/05
+                   POLY3
+5100000115         MDI3133异氰酸脂          KG                                  EL       AC       07/13/09          JCI
+                   ISO                              700
+5100000117         505S开孔软化剂           KG                                  EL       AC       07/13/09          JCI
+                                                    700
+5100000120         POLY4                    KG                                  EL       IC       08/18/17
+5100000201         0545接支聚醚             KG                                  EL       AC       03/20/03          local
+                   0545                             Chemical-化料
+5100000301         蒸馏水                   KG                                  EL       AC       03/20/03          JCI
+                   DISTILLED WATER                  700
+5100000401         DEOA85凝胶剂             KG                                  EL       AC       03/20/03          local
+                   GEL AGENT                        Chemical-化料
+5100000402         33LX胺锡催化剂           KG                                  EL       AC       03/20/03          local
+                   AMINE CATALYZER                  Chemical-化料
+5100000403         A-400延迟催化剂          KG                                  EL       AC       04/20/05          local
+                   DELAY CATALYZER                  Chemical-化料
+5100000404         C225平衡催化剂           kg                                  EL       AC       06/23/06          local
+                   C225                             Chemical-化料
+5100000405         EF150 延迟催化剂         KG                                  ADC      AC       12/22/15
+                   EF150 DELAY CATALYZER
+5100000406         NE1090 凝胶催化剂        KG                                  ADC      AC       12/22/15
+                   NE1090 CATALYZER
+5100000407         氯醇 湿热老化剂          KG                                  ADC      AC       12/22/15
+                   Chlorohydrin
+5100000408         NE1082 凝胶催化剂        KG                                  ADC      AC       05/12/16
+                   NE1082 CATALYZER
+5100000501         TM20异氰酸脂             KG                                  EL       AC       03/20/03          local
+                   ISO                              Chemical-化料
+5100000601         脱模剂                   KG                                  EL       AC       03/20/03          JCI
+                                                    700
+5100000602         L-3641 表面活性剂        KG                                  EL       AC       03/20/03          local
+                   L3641 SURFACTANT                 Chemical-化料
+5100000603         消音蜡                   KG                                  LMC      AC       04/21/10          local
+                                                    Chemical-化料
+5100000810         聚氨脂 729               KG                                  S        IC       01/12/04          JCI
+                   Specflex NF 729 Poly             700
+5100000811         聚氨脂 625               KG                                  S        IC       01/12/04          JCI
+                   Specflex NF 625 Poly             700
+5100000812         异氢酸脂 247             KG                                  S        IC       01/12/04          JCI
+                   Specflex NF 247 ISO              700
+5100000813         聚胺酯 657               KG                                  S        IC       01/12/04          JCI
+                   Specflex NF 657 Poly             700
+5100000814         异氢酸脂 134             KG                                  S        IC       01/12/04          JCI
+                   Specflex NE 134 ISO              700
+5100000910         脱模剂                   KG                                  S        AC       01/12/04          local
+                   PURA Release Agent               Chemical-化料
+5100000911         2048开孔剂               KG                                  Z177     AC       08/18/17
+5100000P00         PUR靠背板基板聚醚        KG                                  V212SE   IC       05/27/11          local
+                   Big Backpanel Raw Materi         Chemical-化料
+5100000P10         PUR靠背板基板ISO         KG                                  V212SE   IC       05/27/11          local
+                   Big Backpanel Raw Materi         Chemical-化料
+5100000P20         PUR靠背板基板脱模剂      KG                                  V212SE   IC       05/27/11          local
+                   Big Backpanel demould Ma         Chemical-化料
