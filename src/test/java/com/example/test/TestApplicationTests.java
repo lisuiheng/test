@@ -20,110 +20,58 @@ import java.util.Map;
 public class TestApplicationTests {
 
     @Test
-    public void readCsv() throws IOException {
-        Reader in = new FileReader("/home/lee/IdeaProjects/test/src/main/resources/test.csv");
-        Iterable<CSVRecord> records =  CSVFormat.DEFAULT.withHeader("ID","Name") .withTrim().withDelimiter(' ').parse(in);
-        for (CSVRecord record : records) {
-            String itemNum = record.get("ID");
-            String desc = record.get("Name");
-            System.out.printf("%s %s", itemNum, desc);
+    public void testRead() throws IOException {
+        List<String[]> fieldLists = analyzeCVS("C:\\Users\\Administrator\\IdeaProjects\\test\\src\\main\\resources\\hello.text");
+        for (String[] fields : fieldLists) {
+            for (String field : fields) {
+                System.out.printf("%s ", field);
+            }
+            System.out.println();
         }
     }
 
-    @Test
-    public void writeCSV() throws IOException {
-
-        CSVFormat format = CSVFormat.DEFAULT.withHeader("ID","Name").withDelimiter(' ');
-
-        try(Writer out = new FileWriter("/home/lee/IdeaProjects/test/src/main/resources/test.csv");
-            CSVPrinter printer = new CSVPrinter(out, format)) {
-            List<String> records = new ArrayList<>();
-            records.add("001");
-            records.add("lee");
-            printer.printRecord(records);
-            records = new ArrayList<>();
-            records.add("002");
-            records.add("lei");
-            printer.printRecord(records);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void contextLoads() throws IOException {
-        Reader in = new FileReader("/home/lee/IdeaProjects/test/src/main/resources/test.csv");
-        try {
-            String s = IOUtils.toString(in);
-            System.out.println(s);
-        } finally {
-            IOUtils.closeQuietly(in);
-        }
-
-
-    }
-
-    @Test
-    public void testRead() {
-        int[] is = {1, 2, 3, 4};
-        int i = 0;
-        while (i < is.length) {
-            if (i == 1) {
-                if (is[i] == 2) {
+    private List<String[]> analyzeCVS(String filename) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filename));
+        String line;
+        boolean start = false;
+        List<String[]> filedList = new ArrayList<>();
+        String[] lenFields = new String[0];
+        while ((line = br.readLine()) != null) {
+            //analyze title and every field length
+            if (line.startsWith("Item Number")) {
+                String lenLine = br.readLine();
+                if (lenLine == null) {
                     break;
+                } else if (!lenLine.startsWith("-")) {
+                    throw new RuntimeException("analyze file format invalid");
                 }
+
+                lenFields = lenLine.split(" ");
+                start = true;
+                continue;
+            } else if (start && line.startsWith("  ")) {
+                continue;
+            } else if (start && line.equals("")) {
+                start = false;
             }
-            System.out.println(is[i++]);
-        }
-    }
 
-    @Test
-    public void testReadFile() throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/lee/IdeaProjects/test/src/main/resources/hello.text"))) {
-            String line;
-            boolean start = false;
-            List<String[]> filedList = new ArrayList<>();
-            while ((line = br.readLine()) != null) {
-                //analyze title and every field length
-                if (line.startsWith("Item Number")) {
-                    String lenLine = br.readLine();
-                    if (lenLine == null) {
-                        break;
-                    } else if (!lenLine.startsWith("-")) {
-                        //TODO
-                        throw new RuntimeException("analyze faile");
-                    }
-
-                    start = true;
-                    String[] s = lenLine.split(" ");
-                    filedList.add(s);
-
-                     s = analyzeLine()
-                    filedList.add(s);
-                    continue;
-                } else if (start && line.startsWith("  ")) {
-                    continue;
-                } else if (start && line.equals("")) {
-                    start = false;
+            if (start) {
+                if (lenFields.length == 0) {
+                    throw new RuntimeException("lenFields not init");
                 }
-
-                if (start) {
-                    String[] fields = analyzeLine(line, filedList.get(0));
-                    for (String field : fields) {
-                        System.out.printf("%s ", field);
-                    }
-                    System.out.println();
-                }
+                String[] fields = analyzeLine(line, lenFields);
+                filedList.add(fields);
             }
         }
+        return filedList;
     }
 
-    private String[] analyzeLine(String line, String[] lenLine) {
+    private String[] analyzeLine(String line, String[] lenFields) {
         char[] chars = line.toCharArray();
         int i = 0;
-        String[] fields = new String[lenLine.length];
+        String[] fields = new String[lenFields.length];
         for (int j = 0; i < line.length(); j++) {
-            int len = lenLine[j].length();
+            int len = lenFields[j].length();
 
             int e = i + len + 1;
             if (e > line.length()) {
