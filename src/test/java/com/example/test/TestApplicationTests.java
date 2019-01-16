@@ -1,5 +1,6 @@
 package com.example.test;
 
+import jdk.nashorn.api.scripting.URLReader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +24,10 @@ public class TestApplicationTests {
 
     @Test
     public void testRead() throws IOException {
-        List<String[]> fieldLists = analyzeCVS("C:\\Users\\Administrator\\IdeaProjects\\test\\src\\main\\resources\\hello.text");
+//        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Administrator\\IdeaProjects\\test\\src\\main\\resources\\hello.text"));
+        URL url = new URL("http://127.0.0.1:8001/text.txt");
+        BufferedReader br = new BufferedReader(new URLReader(url));
+        List<String[]> fieldLists = analyzeCVS(br);
         for (String[] fields : fieldLists) {
             for (String field : fields) {
                 System.out.printf("%s ", field);
@@ -31,8 +36,8 @@ public class TestApplicationTests {
         }
     }
 
-    private List<String[]> analyzeCVS(String filename) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+    private List<String[]> analyzeCVS(Reader read) throws IOException {
+        BufferedReader br = new BufferedReader(read);
         String line;
         boolean start = false;
         List<String[]> filedList = new ArrayList<>();
