@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,7 @@ public class TestApplicationTests {
         char[] chars = line.toCharArray();
         int i = 0;
         String[] fields = new String[lenFields.length];
+        Arrays.fill(fields, "");
         for (int j = 0; i < line.length(); j++) {
             int len = lenFields[j].length();
 
