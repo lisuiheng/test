@@ -8,45 +8,22 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.*;
 import java.net.InetSocketAddress;
 
+import com.sun.net.httpserver.*;
+
+import java.io.*;
+import java.net.*;
+
 public class Server {
 
-    public static void main(String[] arg) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8001), 0);
-        server.createContext("/text.txt", new TestHandler());
-        server.start();
-    }
-
-    static class TestHandler implements HttpHandler{
-        @Override
-        public void handle(HttpExchange t)  {
-            Headers h = t.getResponseHeaders();
-
-
-
-            String line;
-            String resp = "";
-
-            try {
-                File newFile = new File("/home/lee/IdeaProjects/test/src/main/resources/test/hello.text");
-                System.out.println("*****lecture du fichier*****");
-                System.out.println("nom du fichier: " + newFile.getName());
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    resp += line + "\r\n";
-                }
-                bufferedReader.close();
-                byte[] bs = resp.getBytes();
-                t.sendResponseHeaders(200, bs.length);
-                OutputStream out = t.getResponseBody();
-                out.write(bs);
-                out.close();
-                t.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
+    public static void main(String[] args) throws IOException {
+//        if (args.length < 1 || args[0].equals("-help") || args[0].equals("--help")) {
+//            System.out.println("Usage: java -jar HttpServer.jar $webroot [$port]");
+//            return;
+//        }
+        HttpServer httpServer = HttpServer.create();
+        httpServer.createContext("/", new StaticHandler("/home/lee/IdeaProjects/test/src/main/resources", false, false));
+        int port = args.length > 1 ? Integer.parseInt(args[1]) : 8000;
+        httpServer.bind(new InetSocketAddress("localhost", port), 100);
+        httpServer.start();
     }
 }

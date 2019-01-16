@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +25,12 @@ public class TestApplicationTests {
 
     @Test
     public void testRead() throws IOException {
-//        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Administrator\\IdeaProjects\\test\\src\\main\\resources\\hello.text"));
-        URL url = new URL("http://127.0.0.1:8001/text.txt");
-        BufferedReader br = new BufferedReader(new URLReader(url));
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(
+                    new FileInputStream("/home/lee/IdeaProjects/test/src/main/resources/hello1.text"),
+                        "GB2312"));
+//        URL url = new URL("http://127.0.0.1:8001/text.txt");
+//        BufferedReader br = new BufferedReader(new URLReader(url));
         List<String[]> fieldLists = analyzeCVS(br);
         for (String[] fields : fieldLists) {
             for (String field : fields) {
@@ -44,18 +48,23 @@ public class TestApplicationTests {
         String[] lenFields = new String[0];
         while ((line = br.readLine()) != null) {
             //analyze title and every field length
-            if (line.startsWith("Item Number")) {
-                String lenLine = br.readLine();
-                if (lenLine == null) {
-                    break;
-                } else if (!lenLine.startsWith("-")) {
-                    throw new RuntimeException("analyze file format invalid");
-                }
+//            if (line.startsWith("Item Number")) {
+            if (line.startsWith("-")) {
+//                String lenLine = br.readLine();
+//                if (lenLine == null) {
+//                    break;
+//                } else if (line.startsWith("  ")) {
+//                    continue;
+//                } else if (!lenLine.startsWith("-")) {
+//                    throw new RuntimeException("analyze file format invalid");
+//                }
 
-                lenFields = lenLine.split(" ");
+                lenFields = line.split(" ");
                 start = true;
                 continue;
-            } else if (start && line.startsWith("  ")) {
+            } else if (start && (line.startsWith("  ")
+                    || line.startsWith("\fppptrp11.p 2+")
+                    || line.startsWith("Page"))) {
                 continue;
             } else if (start && line.equals("")) {
                 start = false;
@@ -77,9 +86,9 @@ public class TestApplicationTests {
         int i = 0;
         String[] fields = new String[lenFields.length];
         Arrays.fill(fields, "");
+        System.out.println(line);
         for (int j = 0; i < line.length(); j++) {
             int len = lenFields[j].length();
-
             int e = i + len + 1;
             if (e > line.length()) {
                 e = line.length();
