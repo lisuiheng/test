@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -22,6 +24,18 @@ import java.util.Map;
 
 
 public class TestApplicationTests {
+
+    @Test
+    public void testPath() throws URISyntaxException, IOException {
+        URL oracle = new URL("http://127.0.0.1/test");
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(oracle.openStream()));
+
+        String inputLine;
+        while ((inputLine = in.readLine()) != null)
+            System.out.println(inputLine);
+        in.close();
+    }
 
     @Test
     public void testRead() throws IOException {
